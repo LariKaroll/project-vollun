@@ -1,0 +1,34 @@
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <h2>Vollun</h2>
+    <nav>
+      <a href="#">Meus Livros</a> 
+      <a href="#">Perfil</a> <br>
+      <button (click)="logout()">Sair</button>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <header>
+      <h1>Bem-vinda, {{ usuario?.name }}!</h1>
+      <p>Status da conta: <span class="badge">Ativa</span></p>
+    </header>
+
+    <section class="info-cards">
+      <div class="card">
+        <h3>Informação Usuario</h3>
+        <h4><strong>ID do usuario: </strong></h4>
+        <p>{{usuario?.id}}</p>
+        <h4>Username</h4>
+        <p>{{usuario?.username}}</p>
+        <h4>Nome</h4>
+        <p>{{usuario?.name}}</p>
+        <h4>Email</h4>
+        <p>{{ usuario?.email }}</p>
+        <h4>CPF</h4>
+        <p>{{usuario?.cpf}}</p>
+      
+      </div>
+    </section>
+  </main>
+</div>
