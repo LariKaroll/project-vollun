@@ -37,8 +37,10 @@ public class User {
     @Column(nullable = false)
     private boolean status;
 
+    @jakarta.persistence.OneToMany(mappedBy = "user", cascade = jakarta.persistence.CascadeType.ALL)
+    private java.util.List<Book> books;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
-
 
 }
