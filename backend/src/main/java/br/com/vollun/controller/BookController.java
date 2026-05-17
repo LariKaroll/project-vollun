@@ -1,8 +1,9 @@
 package br.com.vollun.controller;
 
-import br.com.vollun.model.dto.BookRequest;
+import br.com.vollun.model.dto.BookResponseDTO;
 import br.com.vollun.model.entity.Book;
 import br.com.vollun.model.entity.User;
+import br.com.vollun.repository.IAuthorRepository;
 import br.com.vollun.repository.IBookRepository;
 import br.com.vollun.repository.IUserRepository;
 import br.com.vollun.services.FirebaseStorageService;
@@ -25,16 +26,18 @@ public class BookController {
     private FirebaseStorageService firebaseStorageService;
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private IAuthorRepository authorRepository;
 
     @PostMapping("/file")
-    public ResponseEntity<Book> createInputBook(
+    public ResponseEntity<BookResponseDTO> createInputBook(
             @RequestParam("file")MultipartFile file,
-            @ModelAttribute BookRequest dados,
+            @ModelAttribute BookResponseDTO dados,
             org.springframework.security.core.Authentication authentication
     ) {
 
         String usernameLogado = authentication.getName();
-        User userSystem = userRepository.findByUsername(usernameLogado)
+        User userSystem = userRepository.findByEmail(usernameLogado)
                 .orElseThrow(() -> new RuntimeException("Usuário logado não encontrado no banco!"));
 
         var urlFile = firebaseStorageService.uploadFile(file);
@@ -46,12 +49,11 @@ public class BookController {
         book.setPublicationDate(dados.publicationDate());
         book.setIdAutor(dados.idAutor());
         book.setGenre(dados.genre());
-
         book.setUrlPdf(urlFile);
         book.setUser(userSystem);
 
         Book bookSalvo = bookRepository.save(book);
 
-        return ResponseEntity.ok(bookSalvo);
+        return ResponseEntity.ok(new BookResponseDTO(bookSalvo));
     }
 }

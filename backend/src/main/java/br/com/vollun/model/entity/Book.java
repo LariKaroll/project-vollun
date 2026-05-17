@@ -1,5 +1,6 @@
 package br.com.vollun.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,14 +28,15 @@ public class Book {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String sinopse;
     private LocalDate publicationDate;
-    private UUID idAutor;
     @Column(nullable = false)
     private String genre;
     @Column(nullable = false)
     private String urlPdf;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    private String idAutor;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @CreationTimestamp
