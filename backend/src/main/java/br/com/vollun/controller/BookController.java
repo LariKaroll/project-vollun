@@ -3,7 +3,6 @@ package br.com.vollun.controller;
 import br.com.vollun.model.dto.BookResponseDTO;
 import br.com.vollun.model.entity.Book;
 import br.com.vollun.model.entity.User;
-import br.com.vollun.repository.IAuthorRepository;
 import br.com.vollun.repository.IBookRepository;
 import br.com.vollun.repository.IUserRepository;
 import br.com.vollun.services.FirebaseStorageService;
@@ -26,8 +25,6 @@ public class BookController {
     private FirebaseStorageService firebaseStorageService;
     @Autowired
     private IUserRepository userRepository;
-    @Autowired
-    private IAuthorRepository authorRepository;
 
     @PostMapping("/file")
     public ResponseEntity<BookResponseDTO> createInputBook(

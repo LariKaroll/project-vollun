@@ -2,7 +2,6 @@ package br.com.vollun.services;
 
 import br.com.vollun.exceptions.RecursoNaoEncontradoException;
 import br.com.vollun.model.entity.Author;
-import br.com.vollun.repository.IAuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
