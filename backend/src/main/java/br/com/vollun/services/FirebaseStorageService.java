@@ -1,6 +1,5 @@
 package br.com.vollun.services;
 
-import br.com.vollun.exceptions.RecursoNaoEncontradoException;
 import com.google.firebase.cloud.StorageClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
