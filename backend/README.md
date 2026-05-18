@@ -1,6 +1,6 @@
 # Vollun - Backend 📚
 
-O **Vollun** é uma plataforma digital interativa focada no ecossistema literário, funcionando como uma rede social dinâmica que conecta leitores e autores. O projeto integra um **Gerenciador Literário e de Autoria (GLA)** com recursos sociais avançados.
+O **Vollun** é uma plataforma digital interativa focada no ecossistema literário, funcionando como uma rede social dinâmica que conecta leitores e autores.
 
 ## 🚀 Funcionalidades Atuais
 
