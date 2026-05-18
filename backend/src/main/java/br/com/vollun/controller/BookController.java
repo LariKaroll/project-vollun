@@ -7,6 +7,8 @@ import br.com.vollun.repository.IBookRepository;
 import br.com.vollun.repository.IUserRepository;
 import br.com.vollun.services.BookServices;
 import br.com.vollun.services.FirebaseStorageService;
+import br.com.vollun.services.GoogleBooksService;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/book")
@@ -33,6 +36,13 @@ public class BookController {
     private IUserRepository userRepository;
     @Autowired
     private BookServices bookServices;
+    @Autowired
+    private GoogleBooksService googleBooksService;
+
+    @GetMapping("/search-external")
+    public ResponseEntity<Object> search(@RequestParam String termo) {
+        return ResponseEntity.ok(googleBooksService.buscarLivrosExternos(termo));
+    }
 
     @GetMapping("/my-books")
     public ResponseEntity<List<BookResponseDTO>> listBook(
