@@ -9,8 +9,8 @@ O **Vollun** é uma plataforma digital interativa focada no ecossistema literár
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Linguagem:** Java 17
-- **Framework:** Spring Boot 4.0.0
+- **Linguagem:** Java 21
+- **Framework:** Spring Boot 4.0.6
 - **Banco de Dados:** MySQL
 - **APIs Externas:** Google Books API
 - **Arquivos:** Firebase Storage (Planejado)
