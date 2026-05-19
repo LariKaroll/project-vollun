@@ -9,7 +9,7 @@ import { Auth } from '../../../services/auth';
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css']
 })
-export class navbar implements OnInit {
+export class NavbarComponent implements OnInit {
   searchQuery: string = '';
   usuario: any;
 
