@@ -1,0 +1,43 @@
+/* Este é o container pai que envolve todos os cards */
+.grid-livros {
+    display: grid;
+    /* Cria colunas automáticas com tamanho mínimo de 200px */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Este é o card individual */
+.card-livro {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Conteúdo interno um em cima do outro */
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.card-livro:hover {
+    transform: translateY(-5px); /* Efeito de flutuar ao passar o mouse */
+}
+
+.capa img {
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.btn-add {
+    background-color: cyan;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: auto; 
+}

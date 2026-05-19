@@ -23,11 +23,8 @@ export class Register {
     ) {}
 
     efetuarRegistro() {
-      const dadosParaEnvio = {
-        user: this.novoUsuario
-      };
       
-      this.auth.register(dadosParaEnvio).subscribe({
+      this.auth.register(this.novoUsuario).subscribe({
         next: (res) => {
           console.log("Usuário registrado com sucesso!", res);
           alert("Conta criada! Agora faça seu login.");

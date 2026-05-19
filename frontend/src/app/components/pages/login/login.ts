@@ -19,7 +19,7 @@ export class Login {
     this.auth.logar(dados).subscribe({
       next: (res: any) => {
         alert('Login realizado com sucesso!');
-        this.router.navigate(['/user-area'])
+        this.router.navigate(['/dashboard'])
       },
       error: (err: { error: string; }) => {
           alert('Falha no login: ' + err.error);

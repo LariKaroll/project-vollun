@@ -1,0 +1,24 @@
+<div class="container-busca">
+  <h2>Resultados para: "{{ termoBusca }}"</h2>
+
+  <div class="grid-livros">
+    @for (item of livros; track item.id) {
+      <div class="card-livro">
+        <div class="capa">
+          <img [src]="item.volumeInfo.imageLinks?.thumbnail || 'assets/sem-capa.png'" alt="Capa">
+        </div>
+
+        <div class="detalhes">
+          <h3>{{ item.volumeInfo.title }}</h3>
+          <p class="autor">{{ item.volumeInfo.authors?.join(', ') || 'Autor desconhecido' }}</p>
+          
+          <div class="acoes">
+            <button class="btn-add">Adicionar</button>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <p>Nenhum livro encontrado para "{{ termoBusca }}".</p>
+    }
+  </div>
+</div>
