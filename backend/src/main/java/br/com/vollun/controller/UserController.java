@@ -1,10 +1,11 @@
 package br.com.vollun.controller;
 
 import br.com.vollun.exceptions.RecursoNaoEncontradoException;
-import br.com.vollun.model.dto.LoginRequest;
-import br.com.vollun.model.dto.RegisterRequest;
+import br.com.vollun.model.dto.UserRequestDTO;
+import br.com.vollun.model.dto.UserResponseDTO;
 import br.com.vollun.model.entity.User;
 import br.com.vollun.services.UserServices;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,9 @@ public class UserController {
     private UserServices userServices;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<Object> login(@RequestBody UserRequestDTO userRequestDTO) {
         try {
-            User user = userServices.fazerLogin(loginRequest.email(), loginRequest.password());
+            User user = userServices.fazerLogin(userRequestDTO.email(), userRequestDTO.password());
             return ResponseEntity.ok(user);
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
@@ -37,10 +38,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> createdUser(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<?> createdUser(@RequestBody @Valid UserRequestDTO dados) {
         try {
-            User registerUser = userServices.register(registerRequest.user());
-            return ResponseEntity.status(HttpStatus.CREATED).body(Collections.singletonMap("message","Usuário cadastrado com sucesso!"));
+            UserResponseDTO response = userServices.register(dados);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

@@ -1,6 +1,8 @@
 package br.com.vollun.services;
 
 import br.com.vollun.exceptions.RecursoNaoEncontradoException;
+import br.com.vollun.model.dto.UserRequestDTO;
+import br.com.vollun.model.dto.UserResponseDTO;
 import br.com.vollun.model.entity.User;
 import br.com.vollun.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,26 +25,37 @@ public class UserServices {
         return this.userRepository.findAll();
     }
 
-    public User register(User user) {
+    public UserResponseDTO register(UserRequestDTO dados) {
 
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(dados.username()).isPresent()) {
             throw new RecursoNaoEncontradoException("Usuário já cadastrado.");
         }
 
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(dados.email()).isPresent()) {
             throw new RecursoNaoEncontradoException("Email já cadastrado.");
         }
 
-        if (userRepository.findByCpf(user.getCpf()).isPresent()) {
+        if (userRepository.findByCpf(dados.cpf()).isPresent()) {
             throw new RecursoNaoEncontradoException("CPF já cadastrado.");
         }
 
-        user.setStatus(true);
+        User newUser = new User();
+        newUser.setName(dados.name());
+        newUser.setUsername(dados.username());
+        newUser.setEmail(dados.email());
+        newUser.setCpf(dados.cpf());
+        newUser.setStatus(true);
 
-        String passwordHashed = passwordEncoder.encode(user.getPassword());
-        user.setPassword(passwordHashed);
+        String passwordHashed = passwordEncoder.encode(dados.password());
+        newUser.setPassword(passwordHashed);
 
-        return userRepository.save(user);
+        User userSalvo = userRepository.save(newUser);
+        return new UserResponseDTO(
+                userSalvo.getId(),
+                userSalvo.getName(),
+                userSalvo.getEmail(),
+                userSalvo.getUsername()
+        );
     }
 
     public User deletUser(UUID id) {

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,10 @@ import { Observable, tap } from 'rxjs';
 export class Auth {
   private readonly API = `${environment.apiUrl}/user/login`;
   private readonly API_REGISTER = `${environment.apiUrl}/user/register`;
+
+  private usuarioSubject = new BehaviorSubject<any>(this.getUserLogado());
+  
+  public usuario$ = this.usuarioSubject.asObservable();
 
   constructor(private http: HttpClient) {
   }
@@ -22,12 +26,14 @@ export class Auth {
       tap((usuarioRetornado: any) => {
         
         localStorage.setItem('usuarioLogado', JSON.stringify(usuarioRetornado));
+        this.usuarioSubject.next(usuarioRetornado);
       })
     );
   }
 
   logout() {
     localStorage.removeItem('usuarioLogado');
+    this.usuarioSubject.next(null);
   }
 
   getUserLogado() {

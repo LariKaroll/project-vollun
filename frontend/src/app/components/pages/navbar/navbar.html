@@ -1,0 +1,35 @@
+<header class="navbar">
+  <div class="navbar-content">
+    
+    <div class="logo" routerLink="/">
+      <span class="logo-text">VOLLUN</span>
+    </div>
+
+    <div class="search-container">
+      <i class="ph-magnifying-glass"></i>
+      <input 
+        type="text" 
+        placeholder="Pesquisar livros ou autores..." 
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+      >
+    </div>
+
+    <div class="nav-actions">
+      
+      @if (usuario) {
+        <div class="user-menu">
+          <span class="username" routerLink="/perfil"><strong>{{ usuario.name }}</strong></span>
+          <button (click)="logout()" class="btn-logout">Sair</button>
+        </div>
+
+      } @else {
+        <div class="auth-buttons">
+          <button routerLink="/login" class="btn-login">Entrar</button>
+          <button routerLink="/register" class="btn-register">Cadastrar</button>
+        </div>
+      }
+
+    </div>
+  </div>
+</header>
