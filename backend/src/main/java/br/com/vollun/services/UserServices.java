@@ -1,14 +1,18 @@
 package br.com.vollun.services;
 
 import br.com.vollun.exceptions.RecursoNaoEncontradoException;
+import br.com.vollun.model.dto.BookResponseDTO;
 import br.com.vollun.model.dto.UserRequestDTO;
 import br.com.vollun.model.dto.UserResponseDTO;
+import br.com.vollun.model.entity.Book;
 import br.com.vollun.model.entity.User;
 import br.com.vollun.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +24,22 @@ public class UserServices {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public List<BookResponseDTO> listUserBook(User user) {
+        List<BookResponseDTO> bookDTO = user.getBooks().stream()
+                .map(book -> new BookResponseDTO(
+                        book.getId(),
+                        book.getTitle(),
+                        book.getGenre(),
+                        book.getSinopse(),
+                        book.getUrlPdf(),
+                        book.getPublicationDate(),
+                        book.getCreatedAt(),
+                        book.getIdAutor()
+                ))
+                .toList();
+        return bookDTO;
+    }
 
     public List<User> listUser(){
         return this.userRepository.findAll();
@@ -54,7 +74,8 @@ public class UserServices {
                 userSalvo.getId(),
                 userSalvo.getName(),
                 userSalvo.getEmail(),
-                userSalvo.getUsername()
+                userSalvo.getUsername(),
+                listUserBook(userSalvo)
         );
     }
 
@@ -66,7 +87,7 @@ public class UserServices {
         return user;
     }
 
-    public User fazerLogin(String email, String password) {
+    public UserResponseDTO fazerLogin(String email, String password) {
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Email não encontrado."));
@@ -76,6 +97,13 @@ public class UserServices {
             throw new RecursoNaoEncontradoException("Senha incorreta.");
         }
 
-        return user;
+
+        return new UserResponseDTO(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getUsername(),
+                listUserBook(user)
+        );
     }
 }

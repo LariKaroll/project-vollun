@@ -4,6 +4,7 @@ import br.com.vollun.model.entity.Book;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public record BookResponseDTO(
@@ -14,8 +15,7 @@ public record BookResponseDTO(
         String urlPdf,
         LocalDate publicationDate,
         LocalDateTime createdAt,
-        String idAutor,
-        UUID idUser
+        String idAutor
 ) {
     public BookResponseDTO(Book book) {
         this(
@@ -26,8 +26,7 @@ public record BookResponseDTO(
                 book.getUrlPdf(),
                 book.getPublicationDate(),
                 book.getCreatedAt(),
-                book.getIdAutor(),
-                book.getUser() != null ? book.getUser().getId() : null
+                book.getIdAutor()
         );
     }
 }

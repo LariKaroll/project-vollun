@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 export class Auth {
   private readonly API = `${environment.apiUrl}/user/login`;
   private readonly API_REGISTER = `${environment.apiUrl}/user/register`;
+  private readonly API_PDF = `${environment.apiUrl}/book/file`
 
   private usuarioSubject = new BehaviorSubject<any>(this.getUserLogado());
   
@@ -17,12 +18,16 @@ export class Auth {
   constructor(private http: HttpClient) {
   }
 
+  updatePdf(dadosPdf: any): Observable<any> {
+    return this.http.post(this.API_PDF, dadosPdf, {responseType: 'text'});
+  }
+
   register(dadosUsuario: any): Observable<any> {
-  return this.http.post(this.API_REGISTER, dadosUsuario,{responseType : 'text' });
+    return this.http.post(this.API_REGISTER, dadosUsuario,{responseType : 'text' });
 }
 
   logar(credenciais: any) {
-    return this.http.post(this.API, credenciais).pipe(
+    return this.http.post(this.API, credenciais, {responseType: 'json'}).pipe(
       tap((usuarioRetornado: any) => {
         
         localStorage.setItem('usuarioLogado', JSON.stringify(usuarioRetornado));

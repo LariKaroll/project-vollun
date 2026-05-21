@@ -30,7 +30,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody UserRequestDTO userRequestDTO) {
         try {
-            User user = userServices.fazerLogin(userRequestDTO.email(), userRequestDTO.password());
+            UserResponseDTO user = userServices.fazerLogin(userRequestDTO.email(), userRequestDTO.password());
             return ResponseEntity.ok(user);
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
