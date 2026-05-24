@@ -12,21 +12,6 @@ public record BookResponseDTO(
         String title,
         String genre,
         String sinopse,
-        String urlPdf,
         LocalDate publicationDate,
-        LocalDateTime createdAt,
         String idAutor
-) {
-    public BookResponseDTO(Book book) {
-        this(
-                book.getId(),
-                book.getTitle(),
-                book.getGenre(),
-                book.getSinopse(),
-                book.getUrlPdf(),
-                book.getPublicationDate(),
-                book.getCreatedAt(),
-                book.getIdAutor()
-        );
-    }
-}
+) {}

@@ -1,5 +1,6 @@
 package br.com.vollun.controller;
 
+import br.com.vollun.model.dto.BookRequestDTO;
 import br.com.vollun.model.dto.BookResponseDTO;
 import br.com.vollun.model.entity.Book;
 import br.com.vollun.model.entity.User;
@@ -66,7 +67,7 @@ public class BookController {
 //    }
 
     @PostMapping("/file")
-    public ResponseEntity<BookResponseDTO> createInputBook(
+    public ResponseEntity<BookRequestDTO> createInputBook(
             @RequestParam("file")MultipartFile file,
             @ModelAttribute BookResponseDTO dados,
             org.springframework.security.core.Authentication authentication
@@ -90,6 +91,6 @@ public class BookController {
 
         Book bookSalvo = bookRepository.save(book);
 
-        return ResponseEntity.ok(new BookResponseDTO(bookSalvo));
+        return ResponseEntity.ok(new BookRequestDTO(bookSalvo));
     }
 }

@@ -1,0 +1,53 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: vollun-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+  
+
+  api:
+    build: ./backend 
+    container_name: vollun-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/${DB_NAME}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&autoReconnect=true&maxReconnects=5&connectTimeout=10000
+      - SPRING_DATASOURCE_USERNAME=${DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - GOOGLE_BOOKS_NET=${GOOGLE_BOOKS_API_KEY}
+      - FIRE-BASE-API-KEY=/app/firebase-chave.json
+    volumes:
+      - ./config/firebase-chave.json:/app/firebase-chave.json 
+    networks:
+      - app-network
+  
+  web:
+    build: ./frontend
+    container_name: vollun-frontend
+    restart: always
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+    volumes:
+      - ./frontend:/app 
+      - /app/node_modules
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:

@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.gla</groupId>
-	<artifactId>rede-social-livros-autores</artifactId>
+	<artifactId>vollun</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>

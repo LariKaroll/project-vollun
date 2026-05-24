@@ -1,12 +1,12 @@
 <div class="updatePdf">
     <h2 class="title-update">Update PDF</h2>
     <form #updatepdfForm="ngForm" (ngSubmit)="fazerUpdatePdf()">
-        <input type="text" class="title-pdf" [(ngModel)]="novoPDF.title" placeholder="Titulo" required>
-        <input type="text" class="genre-pdf" [(ngModel)]="novoPDF.genre" placeholder="Genero" required>
-        <input type="text" class="sinopse-pdf" [(ngModel)]="novoPDF.sinopse" placeholder="Sinopse" required>
-        <input type="date" class="publicationDate-pdf" [(ngModel)]="novoPDF.publicationDate" placeholder="Data de Publicação" required>
-        <input type="text" class="autor-pdf" [(ngModel)]="novoPDF.autor" placeholder="Autor" required>
-        <input type="file" name="updatePdf" [(ngModel)]="novoPDF.file">
+        <input type="text" class="title-pdf" [(ngModel)]="novoPDF.title" name ="title-pdf" placeholder="Titulo" required>
+        <input type="text" class="genre-pdf" [(ngModel)]="novoPDF.genre" name ="genre" placeholder="Genero" required>
+        <input type="text" class="sinopse-pdf" [(ngModel)]="novoPDF.sinopse" name ="sinopse-pdf" placeholder="Sinopse" required>
+        <input type="date" class="publicationDate-pdf" [(ngModel)]="novoPDF.publicationDate" name ="publicationDate-pdf" placeholder="Data de Publicação" required>
+        <input type="text" class="autor-pdf" [(ngModel)]="novoPDF.autor" name ="autor-pdf" placeholder="Autor" required>
+        <input type="file" name="updatePdf" [(ngModel)]="novoPDF.file" name ="title-pdf">
         <button type="submit">Cadastrar</button>
     </form>
 </div>

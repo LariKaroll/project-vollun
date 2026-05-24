@@ -20,7 +20,7 @@ export class UpdatePDF {
   }
 
   user: any;
-
+  
   constructor(
     private auth : Auth,
     private router: Router
@@ -31,6 +31,8 @@ export class UpdatePDF {
   }
 
   fazerUpdatePdf() {
+
+    this.ngOnInit();
 
     this.auth.updatePdf(this.novoPDF).subscribe({
       next: (res) => {
