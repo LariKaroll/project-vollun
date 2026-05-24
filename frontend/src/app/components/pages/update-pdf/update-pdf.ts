@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Auth } from '../../../services/auth';
 import { Router } from '@angular/router';
-import { form } from '@angular/forms/signals';
+
 
 @Component({
   selector: 'app-update-pdf',
@@ -17,7 +17,7 @@ export class UpdatePDF implements OnInit{
     genre: '',
     sinopse: '',
     publicationDate: '',
-    autor: ''
+    idAutor: ''
   }
 
   arquivoSelecionado: File | null = null;
@@ -31,10 +31,6 @@ export class UpdatePDF implements OnInit{
 
   ngOnInit() {
     this.user = this.auth.getUserLogado();
-
-    if (this.user && this.user.name) {
-      this.novoPDF.autor = this.user.name; 
-    }
   }
 
   onFileSelected(event: any) {
@@ -57,7 +53,7 @@ export class UpdatePDF implements OnInit{
     formData.append('genre', this.novoPDF.genre);
     formData.append('sinopse', this.novoPDF.sinopse);
     formData.append('publicationDate', this.novoPDF.publicationDate);
-    formData.append('autor', this.novoPDF.autor);
+    formData.append('autor', this.novoPDF.idAutor);
 
     this.auth.updatePdf(formData).subscribe({
       next: (res) => {
