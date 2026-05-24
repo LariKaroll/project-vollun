@@ -32,9 +32,7 @@ public class UserServices {
                         book.getTitle(),
                         book.getGenre(),
                         book.getSinopse(),
-                        book.getUrlPdf(),
                         book.getPublicationDate(),
-                        book.getCreatedAt(),
                         book.getIdAutor()
                 ))
                 .toList();
