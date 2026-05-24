@@ -4,15 +4,13 @@ import br.com.vollun.exceptions.RecursoNaoEncontradoException;
 import br.com.vollun.model.dto.BookResponseDTO;
 import br.com.vollun.model.dto.UserRequestDTO;
 import br.com.vollun.model.dto.UserResponseDTO;
-import br.com.vollun.model.entity.Book;
 import br.com.vollun.model.entity.User;
 import br.com.vollun.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -39,7 +37,7 @@ public class UserServices {
         return bookDTO;
     }
 
-    public List<User> listUser(){
+    public List<User> listUser(){   
         return this.userRepository.findAll();
     }
 
@@ -73,7 +71,7 @@ public class UserServices {
                 userSalvo.getName(),
                 userSalvo.getEmail(),
                 userSalvo.getUsername(),
-                listUserBook(userSalvo)
+                List.of()
         );
     }
 
@@ -94,7 +92,6 @@ public class UserServices {
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new RecursoNaoEncontradoException("Senha incorreta.");
         }
-
 
         return new UserResponseDTO(
                 user.getId(),

@@ -15,7 +15,8 @@ export class Register {
     username: '',
     email: '',
     password: '',
-    cpf: ''
+    cpf: '',
+    status:true
   };
   constructor(
       private auth: Auth, 

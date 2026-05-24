@@ -7,9 +7,11 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
   
 
   api:
@@ -25,16 +27,16 @@ services:
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - GOOGLE_BOOKS_NET=${GOOGLE_BOOKS_API_KEY}
-      - FIRE-BASE-API-KEY=/app/firebase-chave.json
+      - FIRE-BASE-API-KEY=${FIRE_BASE_KEY}
     volumes:
-      - ./config/firebase-chave.json:/app/firebase-chave.json 
+      - ./config/firebase-chave.json:/app/firebase-chave.json:ro
     networks:
       - app-network
   
   web:
     build: ./frontend
     container_name: vollun-frontend
-    restart: always
+  
     ports:
       - "4200:4200"
     depends_on:

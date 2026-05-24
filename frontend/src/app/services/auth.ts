@@ -18,12 +18,12 @@ export class Auth {
   constructor(private http: HttpClient) {
   }
 
-  updatePdf(): Observable<any> {
-    return this.http.post(this.API_PDF, this.usuario$, {responseType: 'text'});
+  updatePdf(dadosPDF: FormData): Observable<any> {
+    return this.http.post(this.API_PDF, dadosPDF, {responseType: 'text'});
   }
 
   register(dadosUsuario: any): Observable<any> {
-    return this.http.post(this.API_REGISTER, dadosUsuario,{responseType : 'text' });
+    return this.http.post(this.API_REGISTER, dadosUsuario);
 }
 
   logar(credenciais: any) {

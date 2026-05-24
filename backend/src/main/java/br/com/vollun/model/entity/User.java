@@ -1,6 +1,6 @@
 package br.com.vollun.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,7 +44,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean status;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private java.util.List<Book> books;
 
     @CreationTimestamp
