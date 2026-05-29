@@ -1,6 +1,5 @@
 package br.com.vollun.config;
 
-import br.com.vollun.exceptions.RecursoNaoEncontradoException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

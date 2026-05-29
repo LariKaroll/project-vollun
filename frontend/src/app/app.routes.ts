@@ -5,6 +5,7 @@ import { Register } from './components/pages/register/register';
 import { SearchResults } from './components/pages/search-results/search-results';
 import { Dashboard } from './components/pages/dashboard/dashboard';
 import { UpdatePDF } from './components/pages/update-pdf/update-pdf';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {path: "login", component: Login },
@@ -12,5 +13,5 @@ export const routes: Routes = [
     {path: "register", component: Register},
     {path: "search-results", component: SearchResults},
     {path: "dashboard", component: Dashboard},
-    {path: "update-pdf", component: UpdatePDF}
+    {path: "update-pdf", component: UpdatePDF, canActivate: [authGuard]}
 ];

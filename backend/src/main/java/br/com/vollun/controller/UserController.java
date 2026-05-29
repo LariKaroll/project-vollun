@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserServices userServices;
@@ -57,4 +60,10 @@ public class UserController {
         var userDelet = userServices.deletUser(id);
         return ResponseEntity.status(HttpStatus.OK).body(userDelet);
     }
+
+    @GetMapping("/list/{id}")
+    public Optional<User> listById(@PathVariable UUID id) {
+        return userServices.listById(id);
+    }
+    
 }
